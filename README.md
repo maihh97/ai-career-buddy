@@ -1,188 +1,136 @@
-# Career Buddy - AI Career Assistant 👔
+# AI Career Buddy - Career Coaching Platform [WIP]
 
-A Streamlit-powered career coaching application that uses Microsoft Agent Framework and Azure OpenAI to provide intelligent career guidance, resume analysis, and job search support.
+A comprehensive Streamlit-powered career coaching platform featuring advanced AI chat assistance and immersive interview practice with Azure Text-to-Speech Avatars. Built with Azure OpenAI and Azure Speech Services for a complete career development experience.
 
-## Features
+## Main Features
 
-- 📄 **Resume Analysis**: Upload and analyze resumes for content quality, ATS compatibility, and improvement suggestions
-- 🎯 **Career Guidance**: Get personalized career advice and development recommendations
-- 💼 **Job Search Support**: Strategies for job hunting, interview preparation, and networking
-- 📝 **Interview Preparation**: Tips and guidance for successful interviews
-- 🔗 **LinkedIn Optimization**: Advice for improving your professional online presence
-- 💰 **Salary Negotiation**: Guidance on compensation discussions
-- 🎭 **Avatar Interview Practice** (NEW!): Realistic interview practice with AI avatars, speech recognition, and audio feedback
+### **AI Career Chat Assistant**
+- **Intelligent Resume Analysis**: Upload and analyze resumes (.pdf, .docx, .txt) with detailed feedback
+- **Career Guidance**: Personalized career advice and development roadmaps
+- **Job Search Strategy**: Comprehensive job hunting strategies and market insights
+- **LinkedIn Optimization**: Professional profile enhancement recommendations
+- **Salary Negotiation**: Compensation discussion strategies and market data
+- **Interactive Chat**: Ongoing conversational support with context awareness
+
+### **Advanced Interview Practice Studio**
+- **Azure Avatar Integration**: Realistic AI interviewer with video responses
+- **Speech Recognition**: Natural voice interaction with Azure Speech-to-Text
+- **Text-to-Speech**: Neural voice synthesis for questions and feedback
+- **Real-time Scoring**: Instant feedback with performance metrics
+- **Multiple Interview Modes**: Practice, Full Interview, and Quick Prep options
+- **Customizable Experience**: Job role-specific questions and difficulty levels
 
 ## Prerequisites
 
-- Python 3.8 or higher
-- Microsoft Foundry (formerly Azure AI Foundry) project with a deployed language model
-- Azure credentials configured
+- **Python**: 3.8 or higher
+- **Azure OpenAI**: Deployed GPT-4/GPT-4o model
+- **Azure Speech Services**: For avatar and speech features (optional)
+- **Azure Credentials**: Properly configured authentication
 
-## Setup Instructions
+## Quick Start
 
-### 1. Install Dependencies
-
-**Important**: The Microsoft Agent Framework is currently in preview, so the `--pre` flag is required:
+### 1. Clone & Install
 
 ```bash
-pip install agent-framework-azure-ai --pre
+git clone https://github.com/maihh97/ai-career-buddy.git
+cd ai-career-buddy
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Configure Azure Resources
+### 2. Configure Environment
 
-1. **Create a Microsoft Foundry Project**:
-   - Go to [Microsoft Foundry](https://ai.azure.com)
-   - Create a new project or use an existing one
-   - Note your project endpoint URL
-
-2. **Deploy a Language Model**:
-   - In your Foundry project, go to the Model Catalog
-   - Deploy a model (recommended: GPT-4, GPT-4o, or similar)
-   - Note the deployment name
-
-3. **Set up Authentication**:
-   - Ensure you have Azure credentials configured
-   - Options include: Azure CLI (`az login`), service principal, or managed identity
-
-### 3. Configure Environment Variables
-
-1. Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
-
-2. Edit `.env` file with your actual values:
-   ```bash
-   AZURE_AI_PROJECT_ENDPOINT=https://your-project.westus2.api.azureml.ms
-   AZURE_AI_MODEL_DEPLOYMENT=gpt-4
-   ```
-
-### 4. Run the Application
-
+Edit the `.env` file in the root directory:
 ```bash
-streamlit run career_buddy_app.py
+# Required - Azure OpenAI Configuration
+AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
+AZURE_OPENAI_API_KEY=your_api_key_here
+AZURE_OPENAI_API_VERSION=your_api_version
+AZURE_OPENAI_DEPLOYMENT_NAME=your_model_name
+
+# Optional - For Avatar Interview Practice
+AZURE_SPEECH_KEY=your_speech_key_here
+AZURE_SPEECH_REGION=your_speech_region
+SPEECH_ENDPOINT=https://<speech_region>.api.cognitive.microsoft.com
 ```
 
-The application will be available at `http://localhost:8501`
+### 3. Launch Application
 
-## Usage Guide
+```bash
+streamlit run career_buddy_chat.py
+```
 
-### Uploading Resumes
+**Access**: Open [http://localhost:8501](http://localhost:8501)
 
-1. **File Upload**: Support for `.txt`, `.pdf`, `.doc`, and `.docx` files
-   - Text files are read directly
-   - For PDF/Word documents, copy and paste the content into the text area
+## User Guide
 
-2. **Direct Input**: Paste resume content directly into the text area
+### **Career Chat Assistant**
 
-### Asking Questions
+**Main Chat Interface (`career_buddy_chat.py`)**
+- **File Upload**: Drag & drop resumes (PDF, DOCX, TXT formats)
+- **Quick Actions**: Pre-built prompts for common career questions
+- **Smart Conversation**: Context-aware discussions about your career
+- **Document Analysis**: Real-time resume parsing and feedback
 
-Choose from predefined questions or ask custom questions:
+**Sample Conversations:**
+- "Analyze my resume for this software engineer position"
+- "What skills should I develop for data science?"
+- "Help me prepare for behavioral interviews"
+- "Review my LinkedIn profile strategy"
 
-- "Analyze my resume and provide feedback"
-- "What skills should I develop for my career?"
-- "Help me prepare for job interviews"
-- "Review my resume for ATS compatibility"
-- And more...
+### **Interview Practice Studio**
 
-### Getting Responses
+**Advanced Practice Mode (`pages/interview_practice.py`)**
 
-Career Buddy will analyze your query and any uploaded content to provide:
-- Detailed feedback and suggestions
-- Actionable advice
-- Industry-specific guidance
-- Best practices and tips
+#### Configuration Options:
+- **Job Roles**: Software Engineer, Data Scientist, Product Manager, etc.
+- **Experience Levels**: Entry, Mid, Senior, Executive
+- **Company Types**: Startup, Tech Giant, Fortune 500, etc.
+- **Interview Modes**: Practice (1-on-1), Full Interview, Quick Prep
 
-## 🎭 Avatar Interview Practice
-
-The new Avatar Interview Practice feature provides a realistic interview experience with:
-
-### Features
-- **Realistic AI Avatars**: Visual representation of an interview coach
-- **Speech Recognition**: Speak your answers naturally using Azure Speech-to-Text
-- **Text-to-Speech**: Hear questions and feedback with Azure neural voices
-- **Interactive Experience**: Real-time avatar animations and visual feedback
-- **Customizable Characters**: Choose from different avatar personalities and styles
-
-### Setup for Avatar Features
-
-1. **Azure Speech Services**:
-   ```bash
-   # Add to your .env file
-   AZURE_SPEECH_KEY=your_speech_key_here
-   AZURE_SPEECH_REGION=your_region  # e.g., eastus, westus2
-   ```
-
-2. **Install Speech SDK**:
-   ```bash
-   pip install azure-cognitiveservices-speech
-   ```
-
-### Using Avatar Interview Practice
-
-1. Navigate to the Interview Practice page
-2. Configure your interview settings (job role, experience level)
-3. Enable Avatar mode in the sidebar
-4. Choose your preferred avatar character and style
-5. Start the interview and interact using speech or text
-
-### Avatar Characters Available
-- **Lisa**: Professional, casual-sitting style
-- **Jason**: Business professional, standing pose
-- **Clara**: Friendly interviewer, professional setting
-- **Sarah**: Senior manager persona
-- **Nancy**: Technical interviewer specialist
+#### Interactive Features:
+- ** Voice Input**: Speak your answers naturally
+- ** Audio Feedback**: Hear questions and feedback
+- ** Avatar Mode**: Visual AI interviewer with video responses
+- ** Scoring System**: Real-time performance metrics
+- **⏭ Skip Options**: Flexible pacing controls
 
 ## Architecture
 
-The application uses:
+### **Core Technologies**
+- **Frontend**: Streamlit with interactive components and responsive design
+- **AI Engine**: Azure OpenAI (GPT-4/GPT-4o) for intelligent conversations
+- **Speech Processing**: Azure Speech Services (STT/TTS/Avatar)
+- **Document Processing**: PyPDF, python-docx for resume parsing
+- **Authentication**: Environment-based configuration
 
-- **Microsoft Agent Framework**: For AI agent orchestration and management
-- **Azure OpenAI**: For intelligent language processing
-- **Azure Speech Services**: For text-to-speech and speech recognition
-- **Azure Text-to-Speech Avatar**: For realistic visual interview experience
-- **Streamlit**: For the web interface with HTML components for avatar display
-- **Azure Identity**: For secure authentication
+### **Application Structure**
+```
+ai-career-buddy/
+├── career_buddy_chat.py      # Main chat interface
+├── pages/
+│   └── interview_practice.py # Interview practice studio
+├── requirements.txt          # Dependencies
+├── .env                     # Configuration
+└── README.md               # Documentation
+```
 
-## Security Considerations
+### **Azure Services Integration**
+- **Azure OpenAI**: Chat completions and intelligent responses
+- **Azure Speech-to-Text**: Voice input processing
+- **Azure Text-to-Speech**: Neural voice synthesis
+- **Azure Avatar API**: Video-based AI interviewer synthesis
 
-- Never commit `.env` files with credentials to version control
-- The application processes uploaded files locally and securely
-- All AI processing happens through encrypted connections to Azure
-- Consider data privacy when uploading sensitive resume information
+### **Documentation**
+- **Azure OpenAI**: [Documentation](https://docs.microsoft.com/azure/cognitive-services/openai/)
+- **Azure Speech**: [Speech Services Docs](https://docs.microsoft.com/azure/cognitive-services/speech-service/)
+- **Streamlit**: [Community Forum](https://discuss.streamlit.io/)
 
-## Troubleshooting
+## **Future Roadmap**
 
-### Common Issues
-
-1. **"Microsoft Agent Framework not installed"**:
-   ```bash
-   pip install agent-framework-azure-ai --pre
-   ```
-
-2. **"Azure endpoint not configured"**:
-   - Check your `.env` file
-   - Ensure `AZURE_AI_PROJECT_ENDPOINT` is set correctly
-
-3. **Authentication errors**:
-   - Run `az login` to authenticate with Azure CLI
-   - Verify your Azure credentials have access to the Foundry project
-
-4. **Model deployment issues**:
-   - Verify the model is deployed in your Foundry project
-   - Check that `AZURE_AI_MODEL_DEPLOYMENT` matches your deployment name
-
-### Getting Help
-
-- Check the [Microsoft Agent Framework documentation](https://github.com/microsoft/agent-framework)
-- Review [Azure OpenAI documentation](https://docs.microsoft.com/azure/cognitive-services/openai/)
-- Ensure your Azure subscription has the necessary permissions
-
-## Contributing
-
-Feel free to submit issues and enhancement requests!
-
-## License
-
-This project is provided as-is for educational and development purposes.
+- [ ] **Multi-language Support**: Interview practice in multiple languages
+- [ ] **Advanced Analytics**: Detailed performance tracking and trends
+- [ ] **Team Features**: Collaborative interview preparation
+- [ ] **Mobile App**: Native mobile experience
+- [ ] **API Integration**: Connect with job boards and ATS systems

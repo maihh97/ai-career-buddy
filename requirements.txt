@@ -1,0 +1,21 @@
+streamlit
+requests
+pyyaml
+openai
+certifi
+streamlit_chat
+python-dotenv
+
+# Microsoft Agent Framework (--pre flag required during preview)
+agent-framework-azure-ai
+
+# Azure dependencies
+azure-identity
+azure-ai-projects
+
+# Document processing
+python-docx
+pdfplumber
+
+# Azure Speech Services (for interview practice)
+azure-cognitiveservices-speech
